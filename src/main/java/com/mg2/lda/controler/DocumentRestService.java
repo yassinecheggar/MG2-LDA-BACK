@@ -1,5 +1,6 @@
 package com.mg2.lda.controler;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mg2.lda.models.BestPractice;
+import com.mg2.lda.models.Comment;
 import com.mg2.lda.models.Document;
+import com.mg2.lda.models.Modif;
 import com.mg2.lda.repository.ActiviteRepository;
 import com.mg2.lda.repository.DocumentRepository;
 
@@ -33,6 +36,31 @@ public class DocumentRestService {
 		return repo.findAll();
 	}
 
+
+	@GetMapping("/GetCommentBydoc/{id}")
+	public List<Comment> getCommentBydoc(@PathVariable Integer id){
+		Document doc = repo.findById(id).get();
+		if(doc!=null) {
+			return doc.getCommentsList();
+		}
+		return null;
+	}
+	
+	@GetMapping("/GetLastModBydoc/{id}")
+	public  Modif GetLastModBydoc(@PathVariable Integer id){
+		try {
+			Document doc = repo.findById(id).get();
+			if(doc!=null) {
+				List<Modif>mods =  doc.getModification();
+				mods.sort(Comparator.comparing(Modif::getDateModification).reversed()) ;
+				return mods.get(0);
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		return null;
+	}
 
 	@PostMapping("/Add")
 	public boolean add(@RequestBody Document document) {
