@@ -41,7 +41,9 @@ public class DocumentRestService {
 	public List<Comment> getCommentBydoc(@PathVariable Integer id){
 		Document doc = repo.findById(id).get();
 		if(doc!=null) {
-			return doc.getCommentsList();
+			List<Comment>comments =  doc.getCommentsList();
+			comments.sort(Comparator.comparing(Comment::getDateComment).reversed()) ;
+			return comments;
 		}
 		return null;
 	}
