@@ -35,12 +35,15 @@ public class BestPracticeRestService {
 
 
 	@PostMapping("/Add")
-	public boolean add(@RequestBody BestPractice practice) {
+	public BestPractice add(@RequestBody BestPractice practice) {
 
-		if(repo.save(practice) != null) {
-			return true;
+		try {
+			return repo.save(practice);
+		}catch (Exception e) {
+			return null;
 		}
-		return false;
+		
+		
 	}
 
 	@PutMapping("/Update/{id}")

@@ -35,6 +35,16 @@ public class DocumentRestService {
 	public List<Document> getAll(){
 		return repo.findAll();
 	}
+	
+	@GetMapping("/GetTrainning")
+	public List<Document> getTrainning(){
+		return repo.findTrainningDos();
+	}
+	
+	@GetMapping("/GetNoneTrainning")
+	public List<Document> getNoneTrainning(){
+		return repo.findNoneTrainningDos();
+	}
 
 
 	@GetMapping("/GetCommentBydoc/{id}")

@@ -62,16 +62,7 @@ public class Picture implements Serializable{
 
 
 
-	public String getDesc() {
-		return description;
-	}
 
-
-
-	public void setDesc(String desc) {
-		this.description = desc;
-	}
-	
 	public Feedback getFeedbackImage() {
 		return feedbackImage;
 	}
