@@ -27,10 +27,7 @@ public class Delivrable implements Serializable{
 	@OneToMany(mappedBy="delivrableBest",fetch=FetchType.LAZY)
 	private List<BestPractice>bestPracticeslist;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="delivrableQuest",fetch=FetchType.LAZY)
-	private List<Question> questionsList;
-	
+
 	public Delivrable() {
 		// TODO Auto-generated constructor stub
 	}
@@ -70,27 +67,11 @@ public class Delivrable implements Serializable{
 	}
 
 
-	public List<Question> getQuestionsList() {
-		return questionsList;
-	}
-
-
-	public void setQuestionsList(List<Question> questionsList) {
-		this.questionsList = questionsList;
-	}
 
 
 	public List<Feedback> getFeedbacksList() {
 		return feedbacksList;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Delivrable [id=" + id + ", delivrable=" + delivrable + ", feedbacksList=" + feedbacksList
-				+ ", bestPracticeslist=" + bestPracticeslist + ", questionsList=" + questionsList + "]";
-	}
-
 
 
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mg2.lda.models.Activite;
 import com.mg2.lda.models.Question;
+import com.mg2.lda.models.Reponse;
 import com.mg2.lda.repository.ActiviteRepository;
 import com.mg2.lda.repository.QuestionRepository;
 
@@ -33,6 +34,13 @@ public class QuestionRestService {
 	 @GetMapping("/GetAll")
 		public List<Question> getAll(){
 			return repo.findAll();
+		}
+
+
+		
+	 @GetMapping("/GetReponse/{id}")
+		public List<Reponse> getAllAnswers(@PathVariable Integer id){
+			return repo.findById(id).get().getReponseList();
 		}
 
 

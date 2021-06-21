@@ -19,6 +19,7 @@ public class User implements Serializable{
 	private  String  nom; 
 	private  String  prenom ; 
 	private  String  email;
+	@JsonIgnore 	
 	private  String  pwd;
 	private  String prev;
 	
@@ -36,6 +37,10 @@ public class User implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy="userQuest",fetch=FetchType.LAZY)
 	private  List<Question> questionsList;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="RepsonseQuestion",fetch=FetchType.LAZY)
+	private  List<Reponse> reponseList;
 	
 	
 	
@@ -174,6 +179,16 @@ public class User implements Serializable{
 		this.prev = prev;
 	}
 
-	
+
+	public List<Reponse> getReponseList() {
+		return reponseList;
+	}
+
+
+	public void setReponseList(List<Reponse> reponseList) {
+		this.reponseList = reponseList;
+	}
+
+	 
 	
 }

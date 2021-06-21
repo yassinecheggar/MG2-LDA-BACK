@@ -19,16 +19,13 @@ public class Question implements Serializable{
 	@Id @GeneratedValue
 	private  Integer   id;
 	private  String  decsiption;
+	private  String  categorie;
 	
 
 	@ManyToOne
 	@JoinColumn
 	private User userQuest ; 
 	 
-	
-	@ManyToOne
-	@JoinColumn
-	private Delivrable delivrableQuest;
 	
 	@ManyToOne
 	@JoinColumn
@@ -39,8 +36,8 @@ public class Question implements Serializable{
 	private List<Picture> pictureList;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="questionFeed",fetch=FetchType.LAZY)
-	private List<Feedback> feedbacksList;
+	@OneToMany(mappedBy="RepsonseQuestion",fetch=FetchType.LAZY)
+	private List<Reponse> reponseList;
 	
 	private String ProblemType;
 	private  Date date;
@@ -55,15 +52,42 @@ public class Question implements Serializable{
 
 
 	
-	public List<Feedback> getFeedbacksList() {
-		return feedbacksList;
+	
+
+
+	public String getCategorie() {
+		return categorie;
 	}
 
 
 
-	public void setFeedbacksList(List<Feedback> feedbacksList) {
-		this.feedbacksList = feedbacksList;
+
+
+
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
 	}
+
+
+
+
+
+
+	public List<Reponse> getReponseList() {
+		return reponseList;
+	}
+
+
+
+
+
+
+	public void setReponseList(List<Reponse> reponseList) {
+		this.reponseList = reponseList;
+	}
+
+
+
 
 
 
@@ -97,15 +121,7 @@ public class Question implements Serializable{
 	}
 
 
-	public Delivrable getDelivrableQuest() {
-		return delivrableQuest;
-	}
-
-
-	public void setDelivrableQuest(Delivrable delivrableQuest) {
-		this.delivrableQuest = delivrableQuest;
-	}
-
+	
 
 	public Activite getActiviteQuest() {
 		return activiteQuest;
@@ -148,13 +164,6 @@ public class Question implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "Question [id=" + id + ", decsiption=" + decsiption + ", userQuest=" + userQuest + ", delivrableQuest="
-				+ delivrableQuest + ", activiteQuest=" + activiteQuest + ", pictureList=" + pictureList
-				+ ", feedbacksList=" + feedbacksList + ", ProblemType=" + ProblemType + ", date=" + date + ", phase="
-				+ phase + ", Status=" + Status + "]";
-	}
 
 
 	public List<Picture> getPictureList() {

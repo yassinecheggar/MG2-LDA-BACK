@@ -38,9 +38,7 @@ public class Feedback implements Serializable{
 	private Delivrable delivrableFeed;
 	
 	
-	@ManyToOne
-	@JoinColumn
-	private Question questionFeed;
+	
 	
 	
 	@JsonIgnore
@@ -91,10 +89,6 @@ public class Feedback implements Serializable{
 
 	
 
-	public Question getQuestionFeed() {
-		return questionFeed;
-	}
-
 
 	public void setQuestionFeed(Question questionFeed) {
 		questionFeed = questionFeed;
@@ -105,14 +99,7 @@ public class Feedback implements Serializable{
 		return imagesList;
 	}
 
-@Override
-public String toString() {
-	return "Feedback [id=" + id + ", feedback=" + feedback + ", userFeedback=" + userFeedback + ", activiteFeed="
-			+ activiteFeed + ", delivrableFeed=" + delivrableFeed + ", QuestionFeed=" + questionFeed + ", imagesList="
-			+ imagesList + ", ProblemType=" + ProblemType + ", date=" + date + ", validationDate=" + validationDate
-			+ ", phase=" + phase + "]";
-}
-	
+
 
 	public void setImagesList(List<Picture> imagesList) {
 		this.imagesList = imagesList;
