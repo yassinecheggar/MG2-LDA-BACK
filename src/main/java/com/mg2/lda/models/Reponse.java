@@ -27,6 +27,10 @@ public class Reponse  implements Serializable{
 	@JoinColumn
 	private Question RepsonseQuestion;
 	
+	@ManyToOne
+	@JoinColumn
+	private Feedback RepsonseFeedback;
+	
 		
 
 	@ManyToOne
@@ -57,6 +61,26 @@ public class Reponse  implements Serializable{
 
 	public void setUserReponse(User userReponse) {
 		this.userReponse = userReponse;
+	}
+
+
+
+
+
+
+
+	public Feedback getRepsonseFeedback() {
+		return RepsonseFeedback;
+	}
+
+
+
+
+
+
+
+	public void setRepsonseFeedback(Feedback repsonseFeedback) {
+		RepsonseFeedback = repsonseFeedback;
 	}
 
 

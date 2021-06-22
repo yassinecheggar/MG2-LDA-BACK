@@ -36,12 +36,13 @@ public class FeedbackRestService {
 
 
 	@PostMapping("/Add")
-	public boolean add(@RequestBody Feedback feedback) {
+	public Feedback add(@RequestBody Feedback feedback) {
 
-		if(repo.save(feedback) != null) {
-			return true;
+		try {
+			return repo.save(feedback);
+		}catch (Exception e) {
+			return null;
 		}
-		return false;
 	}
 
 	@PutMapping("/Update/{id}")

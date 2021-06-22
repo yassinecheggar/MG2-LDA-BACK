@@ -45,12 +45,13 @@ public class QuestionRestService {
 
 
 		@PostMapping("/Add")
-		public boolean add(@RequestBody Question question) {
+		public Question add(@RequestBody Question question) {
 
-			if(repo.save(question) != null) {
-				return true;
+			try {
+				return repo.save(question);
+			}catch (Exception e) {
+				return null;
 			}
-			return false;
 		}
 
 		@PutMapping("/Update/{id}")

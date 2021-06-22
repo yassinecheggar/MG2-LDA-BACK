@@ -45,6 +45,10 @@ public class Feedback implements Serializable{
 	@OneToMany(mappedBy="feedbackImage",fetch=FetchType.LAZY)
 	private List<Picture> imagesList;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="RepsonseFeedback",fetch=FetchType.LAZY)
+	private List<Reponse> reponseList;
+	
 	private String ProblemType;
 	private  Date date;
 	private Date validationDate;
@@ -58,6 +62,18 @@ public class Feedback implements Serializable{
 
 	public Integer getId() {
 		return id;
+	}
+
+	
+	
+
+	public List<Reponse> getReponseList() {
+		return reponseList;
+	}
+
+
+	public void setReponseList(List<Reponse> reponseList) {
+		this.reponseList = reponseList;
 	}
 
 
