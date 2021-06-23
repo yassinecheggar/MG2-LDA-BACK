@@ -1,5 +1,8 @@
 package com.mg2.lda.controler;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mg2.lda.models.Activite;
 import com.mg2.lda.models.Delivrable;
 import com.mg2.lda.models.Feedback;
+import com.mg2.lda.models.Reponse;
 import com.mg2.lda.repository.ActiviteRepository;
 import com.mg2.lda.repository.FeedbackRepository;
 
@@ -33,6 +37,27 @@ public class FeedbackRestService {
 	public List<Feedback> getAll(){
 		return repo.findAll();
 	}
+	
+	
+	 @GetMapping("/GetReponse/{id}")
+		public List<Reponse> getAllAnswers(@PathVariable Integer id){
+			return repo.findById(id).get().getReponseList();
+		}
+
+	 
+	 @GetMapping("/ValidatFeed/{id}")
+		public Feedback Validation(@PathVariable Integer id){
+		 
+		
+		 Feedback F = repo.findById(id).get();
+		 if(F!=null) {
+			 F.setValidationDate( new Date(System.currentTimeMillis()));
+				return repo.save(F) ;
+		 }
+		
+		 return  null;
+		}
+
 
 
 	@PostMapping("/Add")

@@ -43,7 +43,6 @@ public class BestPracticeRestService {
 			return null;
 		}
 		
-		
 	}
 
 	@PutMapping("/Update/{id}")
@@ -61,7 +60,6 @@ public class BestPracticeRestService {
 	public void delete(@PathVariable Integer id) {
 
 		repo.deleteById(id) ;
-
 
 	}
 }
