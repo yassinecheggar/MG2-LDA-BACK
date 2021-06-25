@@ -22,8 +22,6 @@ public class Area implements Serializable{
 				+ documentsList + "]";
 	}
 
-
-
 	@Id @GeneratedValue
 	private Integer id; 
 	private String areadesc; 

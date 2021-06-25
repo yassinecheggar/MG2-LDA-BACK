@@ -12,7 +12,15 @@ import com.mg2.lda.models.User;
 @Repository
 public interface UserRepository  extends JpaRepository<User, Integer>{
 
+	@Query(value ="SELECT * FROM lda.user where  username = ?1",nativeQuery = true)
+		User getUserByUsername(String type);
+
 	@Query(value = "SELECT * FROM lda.user where prev  = ?1", nativeQuery = true)
 	List<User> findAllByPrevilege(String type);
-
+	
+	@Query(value = "SELECT * FROM lda.user where username  = ?1", nativeQuery = true)
+		User findByuserName(String type);
+	
+	
 }
+ 

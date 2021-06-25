@@ -1,12 +1,19 @@
 package com.mg2.lda.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,15 +22,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User implements Serializable{
 
 	@Id @GeneratedValue
+	
 	private  Integer id;
 	private  String  nom; 
 	private  String  prenom ; 
-	private  String  email;
-	@JsonIgnore 	
-	private  String  pwd;
-	private  String prev;
+	private  String  username;
 	
+		
+	private  String  password;
+
+	private boolean enabled;
 	
+	 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "role_id")
+            )
+    private Set<Role> roles = new HashSet<>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="userFeedback",fetch=FetchType.LAZY)
@@ -60,6 +74,67 @@ public class User implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+
+
+
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+
+
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+
+
 
 	public Integer getId() {
 		return id;
@@ -91,24 +166,6 @@ public class User implements Serializable{
 	}
 
 
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public String getPwd() {
-		return pwd;
-	}
-
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
 
 	
 	public List<BestPractice> getBestPracticesList() {
@@ -141,14 +198,6 @@ public class User implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", pwd=" + pwd
-				+ ", prev=" + prev + ", feedbackslist=" + feedbackslist + ", bestPracticesList=" + bestPracticesList
-				+ ", questionsList=" + questionsList + ", commentsList=" + commentsList + ", modificationsList="
-				+ modificationsList + "]";
-	}
-
 
 	public List<Comment> getCommentsList() {
 		return commentsList;
@@ -170,15 +219,6 @@ public class User implements Serializable{
 	}
 
 
-	public String getPrev() {
-		return prev;
-	}
-
-
-	public void setPrev(String prev) {
-		this.prev = prev;
-	}
-
 
 	public List<Reponse> getReponseList() {
 		return reponseList;
@@ -189,6 +229,16 @@ public class User implements Serializable{
 		this.reponseList = reponseList;
 	}
 
-	 
+
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", username=" + username + ", password="
+				+ password + ", enabled=" + enabled + "]";
+	}
 	
+	
+
 }
+	
