@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,8 @@ public class BestPractice implements Serializable{
 
 	@Id @GeneratedValue
 	private Integer id;
+	
+	@Column(columnDefinition = "TEXT")
 	private String description;
 	private String  phase ; 
 	private String  categorie;

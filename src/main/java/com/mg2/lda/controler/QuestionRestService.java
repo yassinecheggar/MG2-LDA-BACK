@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mg2.lda.models.Activite;
+import com.mg2.lda.models.BestPractice;
+import com.mg2.lda.models.Picture;
 import com.mg2.lda.models.Question;
 import com.mg2.lda.models.Reponse;
 import com.mg2.lda.repository.ActiviteRepository;
@@ -36,7 +38,19 @@ public class QuestionRestService {
 			return repo.findAll();
 		}
 
-
+	 @GetMapping("/GetResources/{id}")
+		public List<Picture> GetResources(@PathVariable  Integer id){
+			try {
+				Question  quest =  repo.findById(id).get();
+				if(quest!=null) {
+						return quest.getPictureList();
+						}
+			} catch (Exception e) {
+				return null;
+			}
+			
+			return null;
+		}
 		
 	 @GetMapping("/GetReponse/{id}")
 		public List<Reponse> getAllAnswers(@PathVariable Integer id){

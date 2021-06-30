@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mg2.lda.models.BestPractice;
 import com.mg2.lda.models.Feedback;
+import com.mg2.lda.models.Picture;
 import com.mg2.lda.repository.ActiviteRepository;
 import com.mg2.lda.repository.BestPracticeRepository;
 
@@ -31,6 +32,21 @@ public class BestPracticeRestService {
 	@GetMapping("/GetAll")
 	public List<BestPractice> getAll(){
 		return repo.findAll();
+	}
+
+	
+	@GetMapping("/GetResources/{id}")
+	public List<Picture> GetResources(@PathVariable  Integer id){
+		try {
+			BestPractice  best =  repo.findById(id).get();
+			if(best!=null) {
+					return best.getPictureList();
+					}
+		} catch (Exception e) {
+			return null;
+		}
+		
+		return null;
 	}
 
 
