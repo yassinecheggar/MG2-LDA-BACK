@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mg2.lda.models.Activite;
+import com.mg2.lda.models.Role;
 import com.mg2.lda.models.User;
 import com.mg2.lda.repository.ActiviteRepository;
 import com.mg2.lda.repository.UserRepository;
@@ -40,6 +41,13 @@ public class UserRestService {
 	 @GetMapping("/GetById/{id}")
 		public User GetById(@PathVariable Integer id){
 			return repo.findById(id).get();
+		}
+
+	 
+	 
+	 @GetMapping("/GetRole/{name}")
+		public List<String> GetById(@PathVariable String name){
+			return repo.findRole(name);
 		}
 
 	 
