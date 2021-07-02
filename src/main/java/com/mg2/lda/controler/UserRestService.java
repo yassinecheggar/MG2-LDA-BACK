@@ -1,6 +1,8 @@
 package com.mg2.lda.controler;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -21,6 +23,7 @@ import com.mg2.lda.models.Activite;
 import com.mg2.lda.models.Role;
 import com.mg2.lda.models.User;
 import com.mg2.lda.repository.ActiviteRepository;
+import com.mg2.lda.repository.RoleRepository;
 import com.mg2.lda.repository.UserRepository;
 
 @RestController
@@ -31,6 +34,9 @@ public class UserRestService {
 	
 	@Autowired
 	UserRepository repo;
+	
+	@Autowired
+	RoleRepository repoR;
 	 
 	 @GetMapping("/GetAll")
 		public List<User> getAllBesoinPC(){
@@ -81,8 +87,26 @@ public class UserRestService {
 
 		@PutMapping("/Update/{id}")
 		public boolean addBesoinPC(@RequestBody User user,@PathVariable Integer id) {
-
-			//user.setId(id);
+			Set<Role> roles = new HashSet<Role>();
+			
+			User u  =  repo.findById(id).get();
+			if(user.getRoles().size()>0) {
+				for (Role role : user.getRoles()) {
+					roles.add(repoR.getById(role.getId()));
+				}
+			}
+			String s  =  user.getPassword();
+			if(user.getPassword()!=null) {
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		    user.setPassword(passwordEncoder.encode(s)) ;
+		    user.setPassword(u.getPassword());
+			}else {
+				user.setPassword(u.getPassword());
+			}
+			
+		     user.setId(id);
+		 
+		     user.setRoles(roles);
 			if(repo.save(user) != null) {
 				return true;
 			}
