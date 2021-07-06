@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.mg2.lda.models.Document;
+import com.mg2.lda.models.Modif;
 
 
 @Repository
@@ -17,5 +18,10 @@ public interface DocumentRepository  extends JpaRepository<Document, Integer>{
 	
 	@Query(value = "SELECT * FROM lda.document  where  trainning ='yes'", nativeQuery = true)
 	List<Document> findTrainningDos();
-
+	
+	@Query(value = "SELECT * FROM lda.document  WHERE DATE(pub_date) > (NOW() - INTERVAL 7 DAY)", nativeQuery = true)
+	List<Document> findlastAdded();
+	
+	@Query(value = "SELECT * FROM lda.modif WHERE DATE(date_modification) > (NOW() - INTERVAL 7 DAY)", nativeQuery = true)
+	List<Modif> findlastMod();
 }

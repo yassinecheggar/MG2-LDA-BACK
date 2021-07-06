@@ -67,6 +67,10 @@ public class User implements Serializable{
 	@OneToMany(mappedBy="userMod",fetch=FetchType.LAZY)
 	private List<Modif> modificationsList;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="userVisit",fetch=FetchType.LAZY)
+	private List<View> visitList;
+	
 	
 
 	
@@ -227,6 +231,20 @@ public class User implements Serializable{
 
 	public void setReponseList(List<Reponse> reponseList) {
 		this.reponseList = reponseList;
+	}
+
+
+
+
+	public List<View> getVisitList() {
+		return visitList;
+	}
+
+
+
+
+	public void setVisitList(List<View> visitList) {
+		this.visitList = visitList;
 	}
 
 

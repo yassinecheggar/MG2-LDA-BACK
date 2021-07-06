@@ -47,6 +47,18 @@ public class DocumentRestService {
 	}
 
 
+	@GetMapping("/GetLast")
+	public List<Document> GetLast(){
+		return repo.findlastAdded();
+	}
+	
+	@GetMapping("/GetLastMode")
+	public List<Document> GetLastMode(){
+		// to  doooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+		return repo.findlastAdded();
+	}
+
+
 	@GetMapping("/GetCommentBydoc/{id}")
 	public List<Comment> getCommentBydoc(@PathVariable Integer id){
 		Document doc = repo.findById(id).get();
