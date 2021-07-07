@@ -22,6 +22,8 @@ public interface DocumentRepository  extends JpaRepository<Document, Integer>{
 	@Query(value = "SELECT * FROM lda.document  WHERE DATE(pub_date) > (NOW() - INTERVAL 7 DAY)", nativeQuery = true)
 	List<Document> findlastAdded();
 	
-	@Query(value = "SELECT * FROM lda.modif WHERE DATE(date_modification) > (NOW() - INTERVAL 7 DAY)", nativeQuery = true)
-	List<Modif> findlastMod();
+	@Query(value = "SELECT count(*) as doc FROM lda.document", nativeQuery = true)
+	long count();
+	
+	
 }

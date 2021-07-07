@@ -33,6 +33,11 @@ public class ModifRestService {
 	public List<Modif> getAll(){
 		return repo.findAll();
 	}
+	
+	@GetMapping("/GetLastWithId/{id}")
+	public Modif GetLastWithId(@PathVariable Integer id){
+		return repo.findlastModWithUd(id);
+	}
 
 
 	@PostMapping("/Add")

@@ -1,5 +1,7 @@
 package com.mg2.lda.controler;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -14,12 +16,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mg2.lda.models.Author;
 import com.mg2.lda.models.BestPractice;
 import com.mg2.lda.models.Comment;
 import com.mg2.lda.models.Document;
 import com.mg2.lda.models.Modif;
 import com.mg2.lda.repository.ActiviteRepository;
+import com.mg2.lda.repository.BestPracticeRepository;
 import com.mg2.lda.repository.DocumentRepository;
+import com.mg2.lda.repository.FeedbackRepository;
+import com.mg2.lda.repository.ModifRepository;
+import com.mg2.lda.repository.QuestionRepository;
 
 @RestController
 @RequestMapping("Document")
@@ -29,11 +36,32 @@ public class DocumentRestService {
 
 	@Autowired
 	DocumentRepository repo;
+	@Autowired
+	ModifRepository Modifrepo;
+	
+	@Autowired
+	FeedbackRepository Feedrepo;
+	
+	@Autowired
+	BestPracticeRepository Bestfrepo;
+	
+	@Autowired
+	QuestionRepository Questrepo;
 	
 	
 	@GetMapping("/GetAll")
 	public List<Document> getAll(){
 		return repo.findAll();
+	}
+	
+	@GetMapping("/GetCountDash")
+	public List<Long> GetCount(){
+		List<Long> dash = new ArrayList<Long>();
+		dash.add(repo.count());
+		dash.add(Bestfrepo.count());
+		dash.add(Questrepo.count());
+		dash.add(Feedrepo.count());
+		return dash;
 	}
 	
 	@GetMapping("/GetTrainning")
@@ -54,8 +82,22 @@ public class DocumentRestService {
 	
 	@GetMapping("/GetLastMode")
 	public List<Document> GetLastMode(){
+		List<Modif> mods =  Modifrepo.findlastMod();
+		List<Document> docs =  new ArrayList<Document>();
+		
+			for (Modif mod : mods) {
+				Document d = mod.getDocumentMod();
+				Author r = new Author();
+				r.setNom(mod.getUserMod().getNom());
+				r.setPrenom(mod.getUserMod().getPrenom());
+				d.setPubDate((Date) mod.getDateModification());
+				d.setDocummentauthor(r);
+				docs.add(d);
+			}
+	
 		// to  doooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-		return repo.findlastAdded();
+		
+		return docs;
 	}
 
 
