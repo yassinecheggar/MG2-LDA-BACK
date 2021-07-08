@@ -42,7 +42,7 @@ public class UserRestService {
 		public List<User> getAllBesoinPC(){
 			return repo.findAll();
 		}
-	 
+
 	 
 	 @GetMapping("/GetById/{id}")
 		public User GetById(@PathVariable Integer id){
@@ -135,4 +135,11 @@ public class UserRestService {
 
 
 		}
+		
+		 
+		 @GetMapping("/Chek")
+			public String  check(){
+				return "ok";
+			}
+		 
 }

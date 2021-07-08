@@ -19,6 +19,7 @@ public class View implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date date ; 
 	private  String visited;
+	private  Integer visitedid;
 	
 	@ManyToOne
 	@JoinColumn
@@ -28,6 +29,22 @@ public class View implements Serializable{
 	
 	
 	
+	public Integer getVisitedid() {
+		return visitedid;
+	}
+
+
+
+
+
+	public void setVisitedid(Integer visitedid) {
+		this.visitedid = visitedid;
+	}
+
+
+
+
+
 	public Integer getId() {
 		return id;
 	}
