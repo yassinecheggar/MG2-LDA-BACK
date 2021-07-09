@@ -27,6 +27,21 @@ public class ViewService {
 	public List<View> getAll(){
 		return repo.findAll();
 	}
+	
+	@GetMapping("/getDocumentTypeCount")
+	public List<?> getDocumentTypeCount(){
+	
+		System.out.println(repo.getDocumentTypeCount());
+		return repo.getDocumentTypeCount();
+	}
+
+	
+	@GetMapping("/getDocumentCountByType")
+	public List<?> getDocumentCountByType(){
+	
+		
+		return repo.getDocumentCountByType();
+	}
 
 
 	@PostMapping("/Add")
