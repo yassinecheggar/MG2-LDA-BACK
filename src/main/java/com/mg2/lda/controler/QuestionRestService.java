@@ -37,6 +37,11 @@ public class QuestionRestService {
 		public List<Question> getAll(){
 			return repo.findAll();
 		}
+	 
+	 @GetMapping("/getNoneAnswerd")
+		public List<Question> getNoneAnswerd(){
+			return repo.getNoneAnswerd();
+		}
 
 	 @GetMapping("/GetResources/{id}")
 		public List<Picture> GetResources(@PathVariable  Integer id){
@@ -73,6 +78,18 @@ public class QuestionRestService {
 
 			question.setId(id);
 			if(repo.save(question) != null) {
+				return true;
+			}
+			return false;
+		}
+		
+		@GetMapping("/SetStatus/{id}")
+		public boolean SetStatus(@PathVariable Integer id) {
+
+			Question q = repo.findById(id).get();
+			if(q != null) {
+				q.setStatus("resolue");
+				repo.save(q);
 				return true;
 			}
 			return false;

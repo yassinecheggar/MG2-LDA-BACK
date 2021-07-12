@@ -23,4 +23,11 @@ public interface ViewRepository extends JpaRepository<View, Integer>{
 			+ " inner join  lda.type on document.type_document = lda.type.id"
 			+ " group by typedoc", nativeQuery = true)
 	List<?> getDocumentCountByType();
+	
+
+	@Query(value = "SELECT CONCAT(user.nom, ' ', user.prenom) , count(*) FROM lda.view"
+			+ " inner join  lda.user on lda.user.id = lda.view.user_visit"
+			+ " where visited like 'app'"
+			+ "  group by username", nativeQuery = true)
+	List<?> GetUsersVisits();
 }

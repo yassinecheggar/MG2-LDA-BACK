@@ -36,6 +36,12 @@ public class ViewService {
 	}
 
 	
+	@GetMapping("/GetUsersVisits")
+	public List<?> GetUsersVisits(){
+	
+		return repo.GetUsersVisits();
+	}
+	
 	@GetMapping("/getDocumentCountByType")
 	public List<?> getDocumentCountByType(){
 	
