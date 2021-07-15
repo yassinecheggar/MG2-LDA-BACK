@@ -74,15 +74,25 @@ public class UserRestService {
 
 		@PostMapping("/Add")
 		public boolean addActivite(@RequestBody User user) {
-				String s  =  user.getPassword();
+			Set<Role> roles = new HashSet<Role>();
+			
+			String s  =  user.getPassword();
 			 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		     user.setPassword(passwordEncoder.encode(s)) ;
-		     
-			if(repo.save(user) != null) {
-				return true;
-			}
-			System.out.println(user);
-			return false;
+		    
+		    
+		     if(user.getRoles().size()>0) {
+					for (Role role : user.getRoles()) {
+						roles.add(repoR.getById(role.getId()));
+					}
+					user.setRoles(new HashSet<Role>());
+					User res =  repo.save(user);
+					res.setRoles(roles);
+					res.setEnabled(true);
+					repo.save(user);
+				}
+			
+			return true;
 		}
 
 		@PutMapping("/Update/{id}")

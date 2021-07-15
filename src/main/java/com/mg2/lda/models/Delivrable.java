@@ -3,6 +3,7 @@ package com.mg2.lda.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Delivrable implements Serializable{
 
 	@Id @GeneratedValue
-	private  Integer  id;  
+	private  Integer  id;
+	@Column(columnDefinition = "TEXT")
 	private String delivrable;
 	
 	@JsonIgnore

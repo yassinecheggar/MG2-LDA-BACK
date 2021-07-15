@@ -2,6 +2,7 @@ package com.mg2.lda.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Picture implements Serializable{
 	@Id @GeneratedValue
 	private  Integer  id;
 	
-	
+	@Column(columnDefinition = "TEXT")
 	private String   link;
 	private String description;
 	

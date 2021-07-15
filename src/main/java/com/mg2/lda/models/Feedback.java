@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,8 +23,9 @@ public class Feedback implements Serializable{
 	@Id @GeneratedValue
 	private  Integer id;
 	
+	@Column(columnDefinition = "TEXT")
 	private  String  feedback;
-	/*userFeedback , activiteFeed , delivrableFeed can  be  found in  QuestionFeed so  it's  duplicated i wouldn't use theme but ......*/
+	/*userFeedback , activiteFeed , delivrableFeed can  be  found in  QuestionFeed so  it's  duplicated i wouldn't use them but ......*/
 	@ManyToOne
 	@JoinColumn
 	private User userFeedback ; 

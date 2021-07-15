@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,6 +21,7 @@ public class Reponse  implements Serializable{
 	
 	@Column(columnDefinition = "TEXT")
 	private  String  reponse;
+	@Temporal(TemporalType.DATE)
 	private  Date  date;
 	
 	

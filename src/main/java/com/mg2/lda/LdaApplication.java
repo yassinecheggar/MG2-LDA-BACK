@@ -48,14 +48,14 @@ public class LdaApplication {
 		}
 		
 		
-		User u = repo.findByuserName("kamszz123");
+		User u = repo.findByuserName("admin");
 		
 		if(u==null) {
 			
 			User admin =  new User();
-			admin.setNom("kams");
-			admin.setPrenom("kamszz");
-			admin.setUsername("kamszz123");
+			admin.setNom("admin");
+			admin.setPrenom("admin");
+			admin.setUsername("admin");
 			admin.setEnabled(true);
 			admin.setPassword("$2y$12$dZyYZyL2zay4BWpgBrt27OsIqYdYiwse1IaezCJvwLFeg3D49XM72");
 			User res =  repo.save(admin);
